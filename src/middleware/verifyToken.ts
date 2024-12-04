@@ -12,7 +12,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || '') as string | JwtPayload;
         console.log('Token decodificado:', decoded); 
-        (req as any).user = decoded;
+        req.user = decoded;
         next();
     } catch (error) {
         console.error(error);
@@ -20,7 +20,4 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-
-
 export default verifyToken;
-
